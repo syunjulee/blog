@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>初識 JS - 變數與作用域 | AA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  
+    
+<link rel="stylesheet" href="../../../../css/highlight.css">
+
+  
+  <meta name="description" content="在第一次接觸 JS 時，每個人大概都會先認識變數宣告，再來會知道宣告後要怎麼呼叫，寫在呼叫前後會是長什麼樣子等等……，就像當年的映入眼簾到想要掀開那層神秘面紗，如今使用變數，發覺自己對它的背後原理不甚瞭解，縱使現在列隊待消化的知識量已經看不到盡頭，在經過一番整理後，還是決定就從變數開始寫了！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初識 JS - 變數與作用域">
+<meta property="og:url" content="https://syunjulee.github.io/blog/2024/04/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F/index.html">
+<meta property="og:site_name" content="AA">
+<meta property="og:description" content="在第一次接觸 JS 時，每個人大概都會先認識變數宣告，再來會知道宣告後要怎麼呼叫，寫在呼叫前後會是長什麼樣子等等……，就像當年的映入眼簾到想要掀開那層神秘面紗，如今使用變數，發覺自己對它的背後原理不甚瞭解，縱使現在列隊待消化的知識量已經看不到盡頭，在經過一番整理後，還是決定就從變數開始寫了！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/7pesZQV.png">
+<meta property="og:image" content="https://i.imgur.com/7Vubate.png">
+<meta property="article:published_time" content="2024-04-14T06:01:40.000Z">
+<meta property="article:modified_time" content="2024-04-14T06:42:12.496Z">
+<meta property="article:author" content="末次">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="變數">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/7pesZQV.png"><meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1 id="title">
+    <a href="../../../../index.html">AA</a>
+  </h1>
+  <nav>
+    
+    
+      
+      <a class="nav-link" href="../../../../index.html">Home</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="../../../../archives">Archives</a>
+    
+    
+  </nav>
+</header>
+
+    <div id="content">
+      <article id="post-變數與作用域" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="headline name">
+      初識 JS - 變數與作用域
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2024-04-14T06:01:40.000Z" itemprop="datePublished">2024-4-14</time>
+
+          
+            × <span class="article-word-count">1.7k 字</span>
+            <!-- 
+            × <span class="article-time-to-read">6 mins</span>
+             -->
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p>在第一次接觸 JS 時，每個人大概都會先認識變數宣告，再來會知道宣告後要怎麼呼叫，寫在呼叫前後會是長什麼樣子等等……，就像當年的映入眼簾到想要掀開那層神秘面紗，如今使用變數，發覺自己對它的背後原理不甚瞭解，縱使現在列隊待消化的知識量已經看不到盡頭，在經過一番整理後，還是決定就從變數開始寫了！</p>
+<span id="more"></span>
+
+<hr>
+<h3 id="了解變數前，先知道語法作用域（Lexical-scope）"><a href="#了解變數前，先知道語法作用域（Lexical-scope）" class="headerlink" title="了解變數前，先知道語法作用域（Lexical scope）"></a>了解變數前，先知道語法作用域（Lexical scope）</h3><p>JavaScript 屬於直譯式語言，意指是用直譯器把原始碼變成代碼，最後可在電腦運行，而電腦在解析的時候就會確定語法的作用範圍，稱為「靜態作用域」。作用範圍可大可小，決定於宣告時的關鍵字以及是否為函式，若是函式，因為函式必須要在呼叫時才會執行，那時才會決定作用域範圍，所以為「動態作用域」。   </p>
+<hr>
+<h3 id="函式的範圍鏈（Scope-Chain）"><a href="#函式的範圍鏈（Scope-Chain）" class="headerlink" title="函式的範圍鏈（Scope Chain）"></a>函式的範圍鏈（Scope Chain）</h3><p>當函式自己的內容沒有宣告變數，那在執行當下它就會向外查找。若是有兩個函式，它們都沒有被宣告的變數的話，兩個函式都會往各自的外層查找，與它們的執行範圍和呼叫順序無關。如果遇到函式 1 包著函式 2 的狀況，若函式 2 自己沒有宣告，則會先往函式 1 尋找。</p>
+<p><img src="https://i.imgur.com/7pesZQV.png" alt="Image"></p>
+<h5 id="當外層函式和內層函式都沒有宣告變數時，就會各自往外查找。外層函式會找到-John，內層函式在找了兩層後，最終也會找到-John。"><a href="#當外層函式和內層函式都沒有宣告變數時，就會各自往外查找。外層函式會找到-John，內層函式在找了兩層後，最終也會找到-John。" class="headerlink" title="當外層函式和內層函式都沒有宣告變數時，就會各自往外查找。外層函式會找到 John，內層函式在找了兩層後，最終也會找到 John。"></a>當外層函式和內層函式都沒有宣告變數時，就會各自往外查找。外層函式會找到 John，內層函式在找了兩層後，最終也會找到 John。</h5><hr>
+<h3 id="宣告變數"><a href="#宣告變數" class="headerlink" title="宣告變數"></a>宣告變數</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var</span><br></pre></td></tr></table></figure>
+<p>像是一個無拘無束的傭兵，可以應付各種戰況也可以造成各種混亂，如果不是在函數內被宣告，就會在全域物件中留下痕跡，成為全域物件下的一個屬性，所以稱為全域變數，嚴格來說，這個變數會是全域物件下的屬性，一旦函式內找不到變數，便會在全域物件裡抓到這個屬性，而這時並非會是我們想要的結果，最慘的就是遭到污染和衝突，而且變數是無法被刪除的，造成修復程式碼的困難。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">沒有經過宣告的變數也會變成全域物件裡的屬性。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let</span><br></pre></td></tr></table></figure>
+<p>像是有加入公會守規矩的戰士，除了像 var 可以靈活應付戰況外，也知道不該參與的時候就不該露一手，所以被 let 宣告的變數，不會進到全域物件裡，也會安分守己地待在應該處理的地方，Good boy!</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const</span><br></pre></td></tr></table></figure>
+<p>同 let，也是有加入公會的一個守規矩的賢者，因為被 const 宣告的不是變數而是常數，意指一旦被 const 宣告，它的資料就不能被重新賦予，通常會用來宣告不會被變動的資料型別或數學公式，但若是宣告的資料型別為陣列或物件，裡面的內容是可以被修改的。</p>
+<hr>
+<h3 id="三巨頭的作用域"><a href="#三巨頭的作用域" class="headerlink" title="三巨頭的作用域"></a>三巨頭的作用域</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var</span><br></pre></td></tr></table></figure>
+<p>被 var 宣告的變數為全域變數，但函式能關住 var ，只要是函式內被 var 宣告的變數，只能被該函式內使用，就不會變成全域物件的屬性，函式外部也無法正確取得該值。因為 var 宣告的變數只能活在函式內，所以它的作用域被稱為函式作用域（function scope）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 因為只有函式可以關住 var，所以若是使用 for 迴圈，</span></span><br><span class="line"><span class="comment">// 可以用立即函式包住 for 迴圈裡的宣告</span></span><br><span class="line"><span class="comment">// 外部就無法取得 var 宣告的值</span></span><br><span class="line"></span><br><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>let &amp; const：而被這兩位宣告的變數和常數，所有的 { } 都可以將它們關住，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">函式：function fn() &#123;…&#125;</span><br><span class="line">for 迴圈：for (let i = 0; i &lt; 10; i++) &#123;…&#125;</span><br><span class="line">if 判斷式：if(expression) &#123;…&#125;</span><br><span class="line">任何區塊：&#123;…&#125;</span><br></pre></td></tr></table></figure>
+<p>因為 let 和 const 宣告的變數和常數只能活在 { } 內，所以它們的作用域被稱為區塊作用域（block scope）。</p>
+<hr>
+<h3 id="函式的作用域"><a href="#函式的作用域" class="headerlink" title="函式的作用域"></a>函式的作用域</h3><p>先定義一個函數</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myName</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> variName = <span class="string">&#x27;你的名字&#x27;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(variName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>呼叫函式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myName</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> variName = <span class="string">&#x27;你的名字&#x27;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(variName)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">myName</span>();</span><br></pre></td></tr></table></figure>
+<p>透過呼叫函式的名字，就可以把該函式內的最終內容呈現出來，但如果 log 在函式外部：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myName</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> variName = <span class="string">&#x27;你的名字&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">myName</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(variName)</span><br></pre></td></tr></table></figure>
+<p>如此，則會呼叫失敗，並且會顯示 ReferenceError: variName is not defined，因為函式裡 let 並不會活到外部讓 console.log 讀取到，var 和 const 也是。</p>
+<hr>
+<h3 id="提升（Hoisting）"><a href="#提升（Hoisting）" class="headerlink" title="提升（Hoisting）"></a>提升（Hoisting）</h3><p>提升通常用來解釋 JavaScript 變數在記憶體中的運作形式，在瀏覽器執行時，會區分為兩個階段：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 創造階段（Creation）：宣告變數的那一瞬間記憶體空間就被創造了，無值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 執行階段（execution）：當這個變數被賦予值，就可以進這個記憶體空間了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>函式陳述式會在創造階段就會優先載入，函式內容會在創造階段都先準備好了，所以函式陳述式的呼叫不管放哪都可以。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myName</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;從遠方呼叫我&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 此為函式的陳述式，呼叫時放哪都可以</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myName = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;等下再呼叫我&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 此為函式的表達式，呼叫時就要遵守兩階段規則了</span></span><br></pre></td></tr></table></figure>
+<p>若是函式陳述式和函式表達式來比拼，順序會是以下：<br><img src="https://i.imgur.com/7Vubate.png" alt="Image"></p>
+<h5 id="函式陳述式會優先創造，但如果執行順序在函式表達式前，就會被函式表達式覆蓋過去了"><a href="#函式陳述式會優先創造，但如果執行順序在函式表達式前，就會被函式表達式覆蓋過去了" class="headerlink" title="函式陳述式會優先創造，但如果執行順序在函式表達式前，就會被函式表達式覆蓋過去了"></a>函式陳述式會優先創造，但如果執行順序在函式表達式前，就會被函式表達式覆蓋過去了</h5><hr>
+<h3 id="那-let-和-const-有沒有提升呢？"><a href="#那-let-和-const-有沒有提升呢？" class="headerlink" title="那 let 和 const 有沒有提升呢？"></a>那 let 和 const 有沒有提升呢？</h3><p>答案是有的，let 和 const 在宣告時還是會進入創造階段，但從創造到執行的時候會出現暫時性死區（TDZ），而這個區域是無法呼叫變數的。像 var 在這個區域時會出現 undefined，而 let 和 const 則會直接出現不能取得未初始化變數的錯誤。</p>
+<hr>
+<h3 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h3><p>初次撰寫類技術文章，就獻給了 JavaScript 入門級知識點 — 變數，如果再深入研究變數和它延伸的知識點，也會是非常威武的規模。如今只是將自己的流水帳筆記展開成一篇分享筆記，也希望自己能夠將敘述文字再用圖片甚至動畫來鞏固自己的觀念！</p>
+
+      
+    </div>
+    
+    
+    <div class="article-category">
+      
+      
+      
+        <b>Tags:</b>
+        <a class="article-tag-none-link" href="../../../../tags/JavaScript/" rel="tag">JavaScript</a>, <a class="article-tag-none-link" href="../../../../tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>, <a class="article-tag-none-link" href="../../../../tags/%E8%AE%8A%E6%95%B8/" rel="tag">變數</a>
+      
+    </div>
+    
+    
+  </div>
+</article>
+
+  
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="../first-post/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          第一篇文章的各種設定
+        
+      </div>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+    </div>
+  </div>
+  
+
+
+
+
+<div id="settings-container">
+  <div id="dark-mode">dark</div>
+  <div id="sans-font">sans</div>
+</div>
+<script type="text/javascript">
+let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,s=l.getItem('s')||(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches),n=l.getItem('n'),m=d.getElementById("dark-mode"),b=()=>{f('--bg-color','#fafafa');f('--code-bg-color','#f4f4f4');f('--text-color','#212121');f('--secondary-color','#808080');f('--tertiary-color','#b0b0b0');f('--link-color','#b5c8cf');f('--link-hover-color','#618794');f('--link-bg-color','#dae4e7');f('--selection-color','#dae4e7');m.innerHTML="dark"},c=()=>{f('--bg-color','#212121');f('--code-bg-color','#292929');f('--text-color','#fff');f('--secondary-color','#c0c0c0');f('--tertiary-color','#6e6e6e');f('--link-color','#4d6b75');f('--link-hover-color','#96b1bb');f('--link-bg-color','#5d828e');f('--selection-color','#acc1c9');m.innerHTML="light"},o=d.getElementById("sans-font"),e=()=>{f('--body-stack','"Lora", "Georgia", "Times New Roman", serif');o.innerHTML="sans"},g=()=>{f('--body-stack','"Lato", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Verdana", sans-serif');o.innerHTML="serif"};m.onclick=()=>{if(s==2){s=1;l.setItem('s',s);c()}else{s=2;l.setItem('s',s);b()}};o.onclick=()=>{if(n==2){n=1;l.setItem('n',n);g()}else{n=2;l.setItem('n',n);e()}};if(!s){s=2;l.setItem('s',2)};if(s==1){c()};if(!n){n=2;l.setItem('n',2)};if(n==1){g()};
+</script>
+
+
+
+
+</body>
+</html>
