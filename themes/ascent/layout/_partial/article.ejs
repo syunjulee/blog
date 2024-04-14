@@ -6,12 +6,12 @@
         <div class="article-meta">
           <%- partial('post/date', {class_name: 'article-date', date_format: 'YYYY-M-D'}) %>
           <% if (theme.word_count){ %>
-            × <span class="article-word-count"><%= wordcount(post.content) %> words</span>
-            <% if (min2read(post.content) == 1){ %>
-            × <span class="article-time-to-read"><%= min2read(post.content) %> minute</span>
+            × <span class="article-word-count"><%= wordcount(post.content) %> 字</span>
+            <!-- <% if (min2read(post.content) == 1){ %>
+            × <span class="article-time-to-read"><%= min2read(post.content) %> min</span>
             <% } else { %>
-            × <span class="article-time-to-read"><%= min2read(post.content) %> minutes</span>
-            <% } %>
+            × <span class="article-time-to-read"><%= min2read(post.content) %> mins</span>
+            <% } %> -->
           <% } %>
         </div>
       </header>
