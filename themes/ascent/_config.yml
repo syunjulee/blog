@@ -2,9 +2,9 @@
 # Header
 menu:
   Home: /
-  Archives: /archives
-  Category: /categories
-  Tags: /tags
+  Archives: /archives/
+  Category: /categories/
+  Tags: /tags/
 # rss: /atom.xml
 
 # Content
