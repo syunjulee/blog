@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>初識 Python - 變數與基本運算 | AA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  
+    
+<link rel="stylesheet" href="../../../../css/highlight.css">
+
+  
+  <meta name="description" content="Python 是一種直譯式、物件導向的程式語言，它跟 JavaScript 一樣都擁有完整的函式庫和方法。在變數宣告上，它不需要寫上 var、let 或 const，直接用 &#x3D; 就可以宣告變數，而且 Python 具有刪除變數的功能，可以收回佔據動態記憶體的空間，減少工程師的犯錯機會。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初識 Python - 變數與基本運算">
+<meta property="og:url" content="https://syunjulee.github.io/blog/2024/04/16/%E8%AE%8A%E6%95%B8%E8%88%87%E5%9F%BA%E6%9C%AC%E9%81%8B%E7%AE%97/index.html">
+<meta property="og:site_name" content="AA">
+<meta property="og:description" content="Python 是一種直譯式、物件導向的程式語言，它跟 JavaScript 一樣都擁有完整的函式庫和方法。在變數宣告上，它不需要寫上 var、let 或 const，直接用 &#x3D; 就可以宣告變數，而且 Python 具有刪除變數的功能，可以收回佔據動態記憶體的空間，減少工程師的犯錯機會。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2024-04-16T13:20:38.000Z">
+<meta property="article:modified_time" content="2024-04-17T03:04:16.117Z">
+<meta property="article:author" content="末次">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="變數">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1 id="title">
+    <a href="../../../../index.html">AA</a>
+  </h1>
+  <nav>
+    
+    
+      
+      <a class="nav-link" href="../../../../index.html">Home</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="../../../../archives">Archives</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="../../../../categories">Category</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="../../../../tags">Tags</a>
+    
+    
+  </nav>
+</header>
+
+    <div id="content">
+      <article id="post-變數與基本運算" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="headline name">
+      初識 Python - 變數與基本運算
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2024-04-16T13:20:38.000Z" itemprop="datePublished">2024-4-16</time>
+
+          
+            × <span class="article-word-count">772 字</span>
+            <!-- 
+            × <span class="article-time-to-read">2 mins</span>
+             -->
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p>Python 是一種直譯式、物件導向的程式語言，它跟 JavaScript 一樣都擁有完整的函式庫和方法。在變數宣告上，它不需要寫上 var、let 或 const，直接用 &#x3D; 就可以宣告變數，而且 Python 具有刪除變數的功能，可以收回佔據動態記憶體的空間，減少工程師的犯錯機會。</p>
+<span id="more"></span>
+
+<hr>
+<h3 id="變數的位址"><a href="#變數的位址" class="headerlink" title="變數的位址"></a>變數的位址</h3><p>跟 JS 不同的是，JS 透過三大巨頭關鍵字來宣告變數和決定作用域，而 Python 只用一個等號就可以宣告：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">age = <span class="number">18</span></span><br><span class="line"><span class="built_in">print</span>(age) <span class="comment"># 18</span></span><br></pre></td></tr></table></figure>
+<p>在 JS，宣告變數即使沒有賦值，它會先在記憶體空間預留位置給這個變數，而且不能透過指令方法刪除；在 Python，宣告變數的意思是它會在記憶體中儲存這個變數的值，這個值就會有一個記憶體位址，若今天有別的變數也宣告了同樣的值，這兩個變數都會指向同一個位址。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">10</span></span><br><span class="line">y = <span class="number">10</span></span><br><span class="line">z = <span class="number">20</span></span><br><span class="line"><span class="built_in">id</span>(x) <span class="comment"># 1614727440</span></span><br><span class="line"><span class="built_in">id</span>(y) <span class="comment"># 1614727440</span></span><br><span class="line"><span class="built_in">id</span>(z) <span class="comment"># 1614727600</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="底線開頭或結尾開頭的變數"><a href="#底線開頭或結尾開頭的變數" class="headerlink" title="底線開頭或結尾開頭的變數"></a>底線開頭或結尾開頭的變數</h3><p>底線 _ 在 Python 又稱匿名變數或者虛擬變數，但它在寫 Python 語法時也有很多用途和意義：</p>
+<ul>
+<li><p>Python 語法：</p>
+<ul>
+<li>用來跳過不想宣告的變數，代表我不想處理它</li>
+<li>用在 Python 的 REPL 的話，底線也代表上一段程式碼處理的結果</li>
+</ul>
+</li>
+<li><p>變數命名：</p>
+<ul>
+<li>變數名稱前加上底線：<code>_test</code><ul>
+<li>代表是在測試中或者一般不想直接被取用</li>
+</ul>
+</li>
+<li>變數名稱後加上底線：<code>test_</code><ul>
+<li>這種命名方式代表不想跟 Python 關鍵字或內建函式有相同名稱時，會在變數名稱後面加上底線，例如：list_、dict_</li>
+</ul>
+</li>
+<li>變數名稱前加上雙底線：<code>__test</code><ul>
+<li>保留給 Python 內建變數或方法使用</li>
+</ul>
+</li>
+<li>變數名稱前後加上雙底線：<code>__test__</code><ul>
+<li>也是代表不想直接被取用的變數，在各種設定檔中很常見</li>
+</ul>
+</li>
+<li>底線本身也是一個合法的變數名稱</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="等號的多重指定"><a href="#等號的多重指定" class="headerlink" title="等號的多重指定"></a>等號的多重指定</h3><p>在 Python，可以一次宣告多個變數：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = y = z = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>也可以一次修改各自的值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x, y, z = <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span></span><br></pre></td></tr></table></figure>
+<p>比較有趣的就是變數彼此之間交換值：</p>
+<ul>
+<li>方法一：直接對調  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x, y = <span class="number">10</span>, <span class="number">20</span></span><br><span class="line">x, y = y, x</span><br><span class="line"><span class="built_in">print</span>(x, y) <span class="comment"># 20, 10</span></span><br></pre></td></tr></table></figure></li>
+<li>方法二：暫存到別的變數去  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x, y = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(x, y) <span class="comment">#1, 2</span></span><br><span class="line"></span><br><span class="line">tamp = x</span><br><span class="line">x = y</span><br><span class="line">y = tamp</span><br><span class="line"><span class="built_in">print</span>(x, y) <span class="comment">#2, 1</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="刪除變數"><a href="#刪除變數" class="headerlink" title="刪除變數"></a>刪除變數</h3><p>按照 Python 的回收機制，宣告後變數是可以透過指令刪除的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&#x27;John&#x27;</span></span><br><span class="line"><span class="keyword">del</span> name</span><br></pre></td></tr></table></figure>
+<p>透過指令刪除的變數，它會釋放原本佔據的記憶體空間位址，刪除後想要再呼叫變數就會出現未宣告錯誤。</p>
+<hr>
+<h3 id="運算的優先順序"><a href="#運算的優先順序" class="headerlink" title="運算的優先順序"></a>運算的優先順序</h3><p>除了一般熟知的「先乘除、後加減」、小括號裡的運算先做，另外若有次方運算，也是優先處理，優先順序如下：</p>
+<ol>
+<li>次方(**)</li>
+<li>乘(*)、除(&#x2F;)、求餘數(%)、求整數(&#x2F;&#x2F;)，依照出現順序運算</li>
+<li>加(+)、減(-)，依照出現順序運算</li>
+</ol>
+
+      
+    </div>
+    
+    
+    <div class="article-category">
+      
+        <b>Categories:</b>
+        <a class="article-category-link" href="../../../../categories/%E5%89%8D%E8%A8%80/">前言</a>, <a class="article-category-link" href="../../../../categories/%E8%AE%8A%E6%95%B8%E7%9A%84%E4%BD%8D%E5%9D%80/">變數的位址</a>
+      
+      
+        <br/>
+      
+      
+        <b>Tags:</b>
+        <a class="article-tag-none-link" href="../../../../tags/Python/" rel="tag">Python</a>, <a class="article-tag-none-link" href="../../../../tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>, <a class="article-tag-none-link" href="../../../../tags/%E8%AE%8A%E6%95%B8/" rel="tag">變數</a>
+      
+    </div>
+    
+    
+  </div>
+</article>
+
+  
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="../../14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          初識 JS - 變數與作用域
+        
+      </div>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+    </div>
+  </div>
+  
+
+
+
+
+<div id="settings-container">
+  <div id="dark-mode">dark</div>
+  <div id="sans-font">sans</div>
+</div>
+<script type="text/javascript">
+let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,s=l.getItem('s')||(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches),n=l.getItem('n'),m=d.getElementById("dark-mode"),b=()=>{f('--bg-color','#fafafa');f('--code-bg-color','#f4f4f4');f('--text-color','#212121');f('--secondary-color','#808080');f('--tertiary-color','#b0b0b0');f('--link-color','#b5c8cf');f('--link-hover-color','#618794');f('--link-bg-color','#dae4e7');f('--selection-color','#dae4e7');m.innerHTML="dark"},c=()=>{f('--bg-color','#212121');f('--code-bg-color','#292929');f('--text-color','#fff');f('--secondary-color','#c0c0c0');f('--tertiary-color','#6e6e6e');f('--link-color','#4d6b75');f('--link-hover-color','#96b1bb');f('--link-bg-color','#5d828e');f('--selection-color','#acc1c9');m.innerHTML="light"},o=d.getElementById("sans-font"),e=()=>{f('--body-stack','"Lora", "Georgia", "Times New Roman", serif');o.innerHTML="sans"},g=()=>{f('--body-stack','"Lato", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Verdana", sans-serif');o.innerHTML="serif"};m.onclick=()=>{if(s==2){s=1;l.setItem('s',s);c()}else{s=2;l.setItem('s',s);b()}};o.onclick=()=>{if(n==2){n=1;l.setItem('n',n);g()}else{n=2;l.setItem('n',n);e()}};if(!s){s=2;l.setItem('s',2)};if(s==1){c()};if(!n){n=2;l.setItem('n',2)};if(n==1){g()};
+</script>
+
+
+
+
+</body>
+</html>
