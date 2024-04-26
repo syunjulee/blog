@@ -1,0 +1,24 @@
+INFO  Validating config
+INFO  Deploying: git
+INFO  Clearing .deploy_git folder...
+INFO  Copying files from public folder...
+INFO  Copying files from extend dirs...
+[master 938c5c9] Site updated: 2024-04-26 13:48:40
+ 20 files changed, 2972 insertions(+), 81 deletions(-)
+ create mode 100644 2024/04/19/子彈筆記->脈絡化->串成文章/index.html
+ create mode 100644 2024/04/20/用 Flask 建立網站起手式/index.html
+ create mode 100644 2024/04/21/初識 SQL -- 操作邏輯/index.html
+ create mode 100644 2024/04/22/用 Django 建立網站起手式/index.html
+ create mode 100644 2024/04/23/JS 的運算子、型別觀念/index.html
+ create mode 100644 2024/04/24/在 Django 裡使用 CRUD/index.html
+ create mode 100644 2024/04/25/卡/index.html
+ create mode 100644 2024/04/26/卡/index.html
+ create mode 100644 archives/2024/04/page/2/index.html
+ create mode 100644 archives/2024/page/2/index.html
+ create mode 100644 archives/page/2/index.html
+ create mode 100644 page/2/index.html
+ create mode 100644 tags/Flask/index.html
+ create mode 100644 tags/Web-dev/index.html
+ create mode 100644 tags/murmur/index.html
+Branch master set up to track remote branch gh-pages from https://github.com/syunjulee/blog.git.
+INFO  Deploy done: git
