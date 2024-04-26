@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用 Flask 建立網站起手式 | AA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  
+    
+<link rel="stylesheet" href="../../../../css/highlight.css">
+
+  
+  <meta name="description" content="因為建立 HEXO 的關係，我開始把 &lt;% content %&gt; 這種寫法放在心上但還不知道是什麼，直到開始學習 Flask 框架，才真正認識到很多框架都使用這種寫法來連結和模組化網頁檔案，這種寫法稱為 Jinja 神社。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Flask 建立網站起手式">
+<meta property="og:url" content="https://syunjulee.github.io/blog/2024/04/20/%E7%94%A8%20Flask%20%E5%BB%BA%E7%AB%8B%E7%B6%B2%E7%AB%99%E8%B5%B7%E6%89%8B%E5%BC%8F/index.html">
+<meta property="og:site_name" content="AA">
+<meta property="og:description" content="因為建立 HEXO 的關係，我開始把 &lt;% content %&gt; 這種寫法放在心上但還不知道是什麼，直到開始學習 Flask 框架，才真正認識到很多框架都使用這種寫法來連結和模組化網頁檔案，這種寫法稱為 Jinja 神社。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2024-04-20T12:28:05.000Z">
+<meta property="article:modified_time" content="2024-04-26T02:32:50.991Z">
+<meta property="article:author" content="末次">
+<meta property="article:tag" content="Flask">
+<meta property="article:tag" content="Web-dev">
+<meta name="twitter:card" content="summary"><meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1 id="title">
+    <a href="../../../../index.html">AA</a>
+  </h1>
+  <nav>
+    
+    
+      
+      <a class="nav-link" href="../../../../index.html">Home</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="../../../../archives">Archives</a>
+    
+    
+  </nav>
+</header>
+
+    <div id="content">
+      <article id="post-用 Flask 建立網站起手式" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="headline name">
+      用 Flask 建立網站起手式
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2024-04-20T12:28:05.000Z" itemprop="datePublished">2024-4-20</time>
+
+          
+            × <span class="article-word-count">666 字</span>
+            <!-- 
+            × <span class="article-time-to-read">3 mins</span>
+             -->
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p>因為建立 HEXO 的關係，我開始把 <code>&lt;% content %&gt;</code> 這種寫法放在心上但還不知道是什麼，直到開始學習 <code>Flask</code> 框架，才真正認識到很多框架都使用這種寫法來連結和模組化網頁檔案，這種寫法稱為 <a target="_blank" rel="noopener" href="https://palletsprojects.com/p/jinja">Jinja 神社</a>。 </p>
+<span id="more"></span>
+
+<hr>
+<h3 id="幫資料夾建立虛擬環境"><a href="#幫資料夾建立虛擬環境" class="headerlink" title="幫資料夾建立虛擬環境"></a>幫資料夾建立虛擬環境</h3><p>因為 Python 套件在不同版本中不能共存，為了幫專案安裝應該要有的套件，就必須開虛擬環境給專案。</p>
+<hr>
+<h3 id="設定首頁"><a href="#設定首頁" class="headerlink" title="設定首頁"></a>設定首頁</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">home</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;/pages/home.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app.run(port=<span class="number">9999</span>, debug=<span class="literal">True</span>) <span class="comment"># 開啟 port:9999 本地端伺服器，開啟 debug 模式</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="建立網頁結構"><a href="#建立網頁結構" class="headerlink" title="建立網頁結構"></a>建立網頁結構</h3><ul>
+<li>建立 templates&#x2F;layouts 資料夾：放樣版的資料夾，檔案性質為 html</li>
+<li>建立 templates&#x2F;pages 資料夾：放頁面的資料夾，檔案性質為 html</li>
+<li>建立 static&#x2F;images 資料夾：放圖片的資料夾，檔案性質為 jpg, png 等</li>
+<li>建立 static&#x2F;styles 資料夾：放 CSS 檔案的資料夾</li>
+<li>建立 static&#x2F;scripts 資料夾：放 JS 檔案的資料夾</li>
+</ul>
+<hr>
+<h3 id="設定樣版"><a href="#設定樣版" class="headerlink" title="設定樣版"></a>設定樣版</h3><ul>
+<li>在 templates&#x2F;layouts 資料夾建立公版檔案：layout.html</li>
+<li>在 layout.html 裡挖洞，就是共用的部分，共用的部分也可以標示名字來區分 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>&#123;% block title %&#125;大家共用的網站名稱&#123;% endblock %&#125;<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/&quot;</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line">  &#123;% block content %&#125;&#123;% endblock %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+ 只是必須注意用什麼性質開洞，就要用什麼性質關洞(?)<br> <code>&#123;% block 名字 %&#125;&#123;% endblock %&#125;</code><br> <code>&#123;% for 名字 %&#125;&#123;% endfor %&#125;</code></li>
+<li>在要使用共用的網頁最上方先匯入要共用的樣版檔案 <code>&#123;% extends "layout.html" %&#125;</code></li>
+<li>就可以在網頁內寫自己的部分  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> &#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>HOME<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium fugit perferendis quia maiores placeat a sit aspernatur consequatur? Illo unde numquam officiis blanditiis ab dicta esse repellat doloribus laboriosam corrupti.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="用-Python-寫程式"><a href="#用-Python-寫程式" class="headerlink" title="用 Python 寫程式"></a>用 Python 寫程式</h3><p>在一開始管理頁面的 py 檔中，可以直接對特定網頁寫程式：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/lottery&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">lottery</span>():</span><br><span class="line">    numbers = <span class="built_in">sorted</span>(random.sample(<span class="built_in">range</span>(<span class="number">1</span>, <span class="number">50</span>), <span class="number">6</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;/pages/lottery.html&#x27;</span>, numbers=numbers)</span><br></pre></td></tr></table></figure>
+<p>然後就可以回到 html 檔案中寫入這支程式：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for num in numbers %&#125;</span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123; num &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#123; numbers &#125;&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    <div class="article-category">
+      
+      
+      
+        <b>Tags:</b>
+        <a class="article-tag-none-link" href="../../../../tags/Flask/" rel="tag">Flask</a>, <a class="article-tag-none-link" href="../../../../tags/Web-dev/" rel="tag">Web-dev</a>
+      
+    </div>
+    
+    
+  </div>
+</article>
+
+  
+<nav id="article-nav" class="article-nav">
+  
+    <a href="../../21/%E5%88%9D%E8%AD%98%20SQL%20--%20%E6%93%8D%E4%BD%9C%E9%82%8F%E8%BC%AF/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          初識 SQL -- 操作邏輯
+        
+      </div>
+    </a>
+  
+  
+    <a href="../../19/%E5%AD%90%E5%BD%88%E7%AD%86%E8%A8%98-%3E%E8%84%88%E7%B5%A1%E5%8C%96-%3E%E4%B8%B2%E6%88%90%E6%96%87%E7%AB%A0/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          子彈筆記-&gt;脈絡化-&gt;串成文章
+        
+      </div>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+    </div>
+  </div>
+  
+
+
+
+
+<div id="settings-container">
+  <div id="dark-mode">dark</div>
+  <div id="sans-font">sans</div>
+</div>
+<script type="text/javascript">
+let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,s=l.getItem('s')||(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches),n=l.getItem('n'),m=d.getElementById("dark-mode"),b=()=>{f('--bg-color','#fafafa');f('--code-bg-color','#f4f4f4');f('--text-color','#212121');f('--secondary-color','#808080');f('--tertiary-color','#b0b0b0');f('--link-color','#b5c8cf');f('--link-hover-color','#618794');f('--link-bg-color','#dae4e7');f('--selection-color','#dae4e7');m.innerHTML="dark"},c=()=>{f('--bg-color','#212121');f('--code-bg-color','#292929');f('--text-color','#fff');f('--secondary-color','#c0c0c0');f('--tertiary-color','#6e6e6e');f('--link-color','#4d6b75');f('--link-hover-color','#96b1bb');f('--link-bg-color','#5d828e');f('--selection-color','#acc1c9');m.innerHTML="light"},o=d.getElementById("sans-font"),e=()=>{f('--body-stack','"Lora", "Georgia", "Times New Roman", serif');o.innerHTML="sans"},g=()=>{f('--body-stack','"Lato", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Verdana", sans-serif');o.innerHTML="serif"};m.onclick=()=>{if(s==2){s=1;l.setItem('s',s);c()}else{s=2;l.setItem('s',s);b()}};o.onclick=()=>{if(n==2){n=1;l.setItem('n',n);g()}else{n=2;l.setItem('n',n);e()}};if(!s){s=2;l.setItem('s',2)};if(s==1){c()};if(!n){n=2;l.setItem('n',2)};if(n==1){g()};
+</script>
+
+
+
+
+</body>
+</html>
