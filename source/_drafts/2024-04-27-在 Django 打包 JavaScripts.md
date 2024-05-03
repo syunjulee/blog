@@ -1,5 +1,5 @@
 ---
-title: 在 Django 使用 JS 打包工具
+title: 在 Django 打包 JavaScripts
 date: 2024-04-27 09:18:24
 tags:
 ---
