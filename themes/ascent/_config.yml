@@ -2,7 +2,8 @@
 # Header
 menu:
   Home: /
-  Archives: /archives
+  About: /blog/about
+  Archives: /blog/archives
 # rss: /atom.xml
 
 # Content
